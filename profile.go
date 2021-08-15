@@ -9,23 +9,6 @@ import (
 	"github.com/olivere/elastic/v7"
 )
 
-type Profile struct {
-	Firstname string `json:"firstname"`
-	Lastname  string `json:"lastname"`
-	Email     string `json:"email"`
-}
-
-const profileMapping = `{
-	"mappings": {
-		"properties": {
-			"email":       { "type": "keyword" },
-			"firstname":   { "type": "keyword" },
-			"lastname":    { "type": "keyword" }
-			
-		}
-	}
-}`
-
 func getProfile(w http.ResponseWriter, r *http.Request) Profile {
 	user := r.Context().Value("user")
 	claims := user.(*jwt.Token).Claims
